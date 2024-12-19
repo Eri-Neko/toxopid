@@ -1,3 +1,5 @@
+import com.xpdustry.toxopid.spec.ModMetadata
+
 plugins {
     id("com.diffplug.spotless") version "6.25.0"
     id("org.jetbrains.dokka") version "1.9.20"
@@ -7,6 +9,7 @@ plugins {
     id("net.kyori.indra.git") version "3.1.3"
     id("net.kyori.indra.publishing.gradle-plugin") version "3.1.3"
     `kotlin-dsl`
+    id("com.Eri-Neko.catali") version "1.0"
 }
 
 group = "com.xpdustry"
@@ -90,6 +93,11 @@ indraPluginPublishing {
         listOf("mindustry", "testing"),
     )
 }
+
+val metadata = ModMetadata.fromJson(project.file("plugin.json"))
+// Setting the project version from the one located in "mod.json"
+project.version = metadata.version
+
 
 tasks.javadocJar {
     from(tasks.dokkaHtml)
